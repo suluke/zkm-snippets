@@ -2,6 +2,7 @@
 @import './source-code-pro';
 
 $snippet-backgrounds: #3d561e #3c389d #992a19 #67441a #284c36 #38406a #1d5363 #542973 #9f2651 #62302b;
+$foreground-color: #f8f8f2;
 
 html {
   &, body {
@@ -26,7 +27,7 @@ html {
     /* max-height: 70%; */
     overflow: hidden;
     display: block;
-    color: #f8f8f2;
+    color: $foreground-color;
     @for $i from 1 to length($snippet-backgrounds) + 1 {
       &:nth-child(#{$i}) {
         background-color: nth($snippet-backgrounds, $i);
@@ -49,5 +50,16 @@ html {
       top: 20px;
       right: 20px;
     }
+  }
+}
+
+svg {
+  & > rect {
+    display: none;
+  }
+  #p {
+    /* TODO Inverted QR codes are not officially supported by the QR code
+     * SPEC */
+    /* fill: $foreground-color; */
   }
 }
