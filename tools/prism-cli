@@ -1,0 +1,60 @@
+const fs              = require('fs');
+const Prism           = require('prismjs');
+const commandLineArgs = require('command-line-args');
+const optionDefinitions = [
+  { name: 'language', alias: 'l', type: String },
+  { name: 'file', alias: 'f', type: String, defaultOption: true },
+  { name: 'output', alias: 'o', type: String },
+  { name: 'numbers', alias: 'n', type: Boolean },
+];
+const options = commandLineArgs(optionDefinitions);
+
+function getLanguage(lang) {
+  if (Prism.languages[lang]) {
+    return Prism.languages[lang];
+  }
+  try {
+    require('prismjs/components/prism-' + lang);
+    return Prism.languages[lang];
+  } catch(e) {
+    return null;
+  }
+}
+
+// FIXME this is a workaround for a problem currently appearing in prism
+// from nodejs. 'tokens' can be of type UInt8Array, which needs to be
+// .toString()ed before `.replace` can be called on it.
+Prism.util.encode = function (tokens) {
+  const Token = Prism.Token;
+  if (tokens instanceof Token) {
+    return new Token(tokens.type, Prism.util.encode(tokens.content), tokens.alias);
+  } else if (Prism.util.type(tokens) === 'Array') {
+    return Array.prototype.map.call(tokens, Prism.util.encode);
+  } else {
+    const str = tokens.toString();
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+  }
+}
+
+fs.readFile(options.file, (err, code) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+    return;
+  }
+  const language = getLanguage(options.language);
+  if (language === null) {
+    console.error('Unknown language "' + options.language + '"');
+    process.exit(2);
+    return;
+  }
+  const html = Prism.highlight(code, language);
+
+  if (!options.output) {
+    console.log(html);
+  } else {
+    console.error('Output option not implemented');
+    process.exit(3);
+    return;
+  }
+});

@@ -1,13 +1,18 @@
 LANGUAGES := en de
-export PROJECT_ROOT := $(CURDIR)
-export BUILD_DIR := $(PROJECT_ROOT)/build
+export PROJECT_ROOT_DIR := $(CURDIR)
+export PROJECT_BUILD_DIR := $(PROJECT_ROOT_DIR)/build
+export PROJECT_TEMP_DIR := $(PROJECT_BUILD_DIR)/tmp
 
-.PHONY: all prepare
+.PHONY: all prepare clean
 
-all: $(LANGUAGES);
+all: $(LANGUAGES) ;
+
+clean:
+	rm -rf $(PROJECT_BUILD_DIR)/*
 
 prepare:
-	mkdir -p $(BUILD_DIR)
+	echo Node: $(NODE)
+	mkdir -p $(PROJECT_BUILD_DIR)
 
 $(LANGUAGES): %: prepare
-	$(MAKE) -C $@
+	$(MAKE) --no-builtin-rules -C $@
