@@ -1,0 +1,25 @@
+{
+  "name": "zkm-snippets",
+  "version": "1.0.0",
+  "description": "A static website showing codde snippets of our ZKM project's source code",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suluke/zkm-snippets.git"
+  },
+  "author": "Lukas & Lukas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suluke/zkm-snippets/issues"
+  },
+  "homepage": "https://github.com/suluke/zkm-snippets#readme",
+  "devDependencies": {
+    "express": "^4.15.4",
+    "fs-extra": "^4.0.2",
+    "node-sass-middleware": "^0.11.0",
+    "prismjs": "^1.7.0"
+  }
+}
