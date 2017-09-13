@@ -23,6 +23,7 @@
     "hbs-cli": "^1.1.1",
     "node-sass-middleware": "^0.11.0",
     "prismjs": "^1.7.0",
-    "qrcode": "^0.9.0"
+    "qrcode": "^0.9.0",
+    "typeface-source-code-pro": "0.0.35"
   }
 }

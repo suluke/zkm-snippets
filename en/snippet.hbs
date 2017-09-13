@@ -1,9 +1,13 @@
+<div class="snippet">
+  <img src="/assets/{{name}}.png" class="snippet-front-face" />
+  <div class="snippet-back-face">
+    <pre class="snippet-source-container">
+      <code>
+        {{> code }}
+      </code>
+    </pre>
+    <img src="/assets/{{name}}-qr.svg" class="snippet-qr-code"/>
+  </div>
+</div>
 <a href="{{> url }}">
-  <pre>
-    <code>
-      {{> code }}
-    </code>
-  </pre>
-  <img src="/assets/{{name}}.png" />
-  <img src="/assets/{{name}}-qr.svg" />
 </a>
