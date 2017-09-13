@@ -7,13 +7,15 @@ PROG_LANG := glsl
 
 SNIPPETS := $(wildcard snippet-*)
 CODE_HBS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/code.hbs)
+JSONS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/data.json)
 SNIPPETS_HBS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/snippet.hbs)
 RENAMED_HBS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET).hbs)
 PNGS := $(foreach SNIPPET,$(SNIPPETS),$(ASSETS)/$(SNIPPET).png)
+QRCODES := $(foreach SNIPPET,$(SNIPPETS),$(ASSETS)/$(SNIPPET)-qr.svg)
 
 .PHONY: all $(SNIPPETS)
 
-all: $(BUILD_DIR)/index.html $(PNGS) ;
+all: $(BUILD_DIR)/index.html $(PNGS) $(QRCODES);
 
 # The page. Depends on the page template and the available snippets 
 $(BUILD_DIR)/index.html: index.hbs $(RENAMED_HBS)
@@ -31,9 +33,9 @@ $(RENAMED_HBS): $(TMP)/%.hbs: $(TMP)/%/snippet.hbs
 
 # A snippet's hbs partial. Will be generated from the general snippet
 # template, the snippet's formatted code and the github url to the snippet.
-$(SNIPPETS_HBS): $(TMP)/%/snippet.hbs: snippet.hbs $(TMP)/%/code.hbs %/url.hbs
+$(SNIPPETS_HBS): $(TMP)/%/snippet.hbs: snippet.hbs $(TMP)/%/code.hbs %/url.hbs $(TMP)/%/data.json
 	mkdir -p $(dir $@)
-	$(call NODE,hbs) $< -P $(@D)/code.hbs -P $*/url.hbs -o $(dir $@)
+	$(call NODE,hbs) $< -P $(@D)/code.hbs -P $*/url.hbs -D $(@D)/data.json -o $(dir $@)
 	mv $(dir $@)/snippet.html $@
 
 # A snippet's formatted code. We use prismjs to convert plain text to
@@ -42,7 +44,18 @@ $(CODE_HBS): $(TMP)/%/code.hbs: %/snippet
 	mkdir -p $(dir $@)
 	node $(PROJECT_ROOT_DIR)/tools/prism-cli -l $(PROG_LANG) -f $< -n > $@
 
+# Sometimes it's helpful to be able to refer to the snippet's name
+# (e.g. for image url's). That's what these partials are good for
+$(JSONS): $(TMP)/%/data.json:
+	echo '{ "name": "$*" }' > $@
+
 # A snippet's image. Just copied over from the snippet's directory
-$(ASSETS)/%.png: %/image.png
+$(PNGS): $(ASSETS)/%.png: %/image.png
 	mkdir -p $(ASSETS)
 	cp $< $@
+
+# This generates a QR code in svg format
+$(QRCODES): $(ASSETS)/%-qr.svg: %/url.hbs
+	$(call NODE,qrcode) $$(cat $<) $@
+	# We want to be able to style our svg, so add a style inclusion
+	sed -i '1 a\<?xml-stylesheet href="styles.css" type="text/css"?>' $@
