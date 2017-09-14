@@ -24,6 +24,9 @@ html {
   }
 
   .snippet {
+    position: relative;
+    width: 100%;
+    height: 100%;
     /* max-height: 70%; */
     overflow: hidden;
     display: block;
@@ -34,22 +37,57 @@ html {
       }
     }
     .snippet-front-face {
-      width: 100%;
-      height: auto;
-    }
-    .snippet-back-face {
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
     }
-    .snippet-source-container {
-      display: inline-block;
-    }
-    .snippet-qr-code {
+    .snippet-back-face {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      .snippet-back-face-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .snippet-source-container {
+          display: inline-block;
+        }
+        .snippet-qr-code {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+        }
+      }
     }
+    /** Snippet flip mechanism **/
+    input.snippet-flipper {
+      & + .snippet-inner {
+        .snippet-front-face {
+          display: block;
+        }
+        .snippet-back-face {
+          display: none;
+        }
+      }
+      &:checked + .snippet-inner {
+        & {
+          & > .snippet-front-face {
+            display: none;
+          }
+          & > .snippet-back-face {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .snippet-flipper {
+    display: none;
   }
 }
 

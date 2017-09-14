@@ -1,17 +1,18 @@
 <div class="snippet">
-  <img src="/assets/{{name}}.png" class="snippet-front-face" />
-  <div class="snippet-back-face">
-    <pre class="snippet-source-container">
-      <code>
-        {{> code }}
-      </code>
-    </pre>
-    <div class="snippet-qr-code">
-      {{> qr.svg }}
+  <input id="{{name}}-checkbox" type="checkbox" class="snippet-flipper" />
+  <label class="snippet-inner" for="{{name}}-checkbox">
+    <img src="/assets/{{name}}.png" class="snippet-front-face" />
+    <div class="snippet-back-face">
+      <div class="snippet-back-face-inner">
+        <pre class="snippet-source-container">
+          <code>
+            {{> code }}
+          </code>
+        </pre>
+        <a href="{{url}}" class="snippet-qr-code">
+          {{> qr.svg }}
+        </a>
+      </div>
     </div>
-  </div>
+  </label>
 </div>
-<!--
-<a href="{{url}}">
-</a>
--->
