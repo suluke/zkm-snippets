@@ -1,7 +1,6 @@
 <div class="snippet">
   <input id="{{name}}-checkbox" type="checkbox" class="snippet-flipper" />
   <label class="snippet-inner" for="{{name}}-checkbox">
-    <img src="/assets/{{name}}.png" class="snippet-front-face" />
     <div class="snippet-back-face">
       <div class="snippet-back-face-inner">
         <pre class="snippet-source-container">
@@ -13,6 +12,10 @@
           {{> qr.svg }}
         </a>
       </div>
+    </div>
+    <div style="background-image: url(/assets/{{name}}.png);" class="snippet-front-face"></div>
+    <div class="snippet-dogear">
+      <span>click to show code</span>
     </div>
   </label>
 </div>
