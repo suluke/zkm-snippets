@@ -14,9 +14,11 @@ all: $(LANGUAGES) $(WEBFONTS) ;
 clean:
 	rm -rf $(PROJECT_BUILD_DIR)/*
 
-prepare:
-	echo Node: $(NODE)
+prepare: node_modules
 	mkdir -p $(PROJECT_BUILD_DIR)
+
+node_modules: package.json
+	npm i
 
 $(LANGUAGES): %: prepare
 	$(MAKE) --no-builtin-rules -C $@

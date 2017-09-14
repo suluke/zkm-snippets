@@ -3,7 +3,6 @@ NODE = node $(PROJECT_ROOT_DIR)/node_modules/.bin/$(1)
 BUILD_DIR = $(PROJECT_BUILD_DIR)
 TMP := $(PROJECT_TEMP_DIR)/en
 ASSETS := $(BUILD_DIR)/assets
-PROG_LANG := glsl
 
 SNIPPETS := $(wildcard snippet-*)
 CODE_HBS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/code.hbs)
@@ -38,16 +37,16 @@ $(RENAMED_HBS): $(TMP)/%.hbs: $(TMP)/%/snippet.hbs
 # template, the snippet's formatted code and the github url to the snippet.
 # Additionally, the partial gets passed some data (like the snippet's name)
 # over JSON.
-$(SNIPPETS_HBS): $(TMP)/%/snippet.hbs: snippet.hbs $(TMP)/%/code.hbs %/url.hbs $(TMP)/%/qr.svg.hbs $(TMP)/%/data.json
+$(SNIPPETS_HBS): $(TMP)/%/snippet.hbs: snippet.hbs $(TMP)/%/code.hbs %/info.json $(TMP)/%/qr.svg.hbs $(TMP)/%/data.json
 	mkdir -p $(dir $@)
-	$(call NODE,hbs) $< -P $(@D)/code.hbs -P $*/url.hbs -P $(@D)/qr.svg.hbs -D $(@D)/data.json -o $(dir $@)
+	$(call NODE,hbs) $< -P $(@D)/code.hbs -D $*/info.json -P $(@D)/qr.svg.hbs -D $(@D)/data.json -o $(dir $@)
 	mv $(dir $@)/snippet.html $@
 
 # A snippet's formatted code. We use prismjs to convert plain text to
 # formatted html
-$(CODE_HBS): $(TMP)/%/code.hbs: %/snippet
+$(CODE_HBS): $(TMP)/%/code.hbs: %/snippet %/info.json
 	mkdir -p $(dir $@)
-	node $(PROJECT_ROOT_DIR)/tools/prism-cli -l $(PROG_LANG) -f $< -n > $@
+	node $(PROJECT_ROOT_DIR)/tools/prism-cli -l $$($(call NODE,json) -f $*/info.json language) -f $< -n > $@
 
 # Sometimes it's helpful to be able to refer to the snippet's name
 # (e.g. for image url's). That's what these JSON files are good for.
@@ -60,6 +59,6 @@ $(PNGS): $(ASSETS)/%.png: %/image.png
 	cp $< $@
 
 # This generates a QR code in svg format
-$(QRCODES): $(TMP)/%/qr.svg.hbs: %/url.hbs
-	$(call NODE,qrcode) $$(cat $<) $(dir $@)/qr.svg
+$(QRCODES): $(TMP)/%/qr.svg.hbs: %/info.json
+	$(call NODE,qrcode) "$$($(call NODE,json) -f $< url)" $(dir $@)/qr.svg
 	mv $(dir $@)/qr.svg $@
