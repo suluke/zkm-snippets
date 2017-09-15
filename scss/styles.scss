@@ -3,7 +3,10 @@
 
 $snippet-backgrounds: #3d561e #3c389d #992a19 #67441a #284c36 #38406a #1d5363 #542973 #9f2651 #62302b;
 $foreground-color: #f8f8f2;
-$transition-time : 600ms;
+$transition-time : 300ms;
+$dogear-width: 8vw;
+$dogear-edge: $dogear-width * 1.41421356;
+$aspect: 100 / 56;
 
 html {
   &, body {
@@ -27,7 +30,7 @@ html {
   .snippet {
     position: relative;
     width: 100%;
-    height: 56vw;
+    height: (1 / $aspect) * 100vw;
     /* max-height: 70%; */
     overflow: hidden;
     display: block;
@@ -43,8 +46,14 @@ html {
       left: 0;
       width: 100%;
       height: 100%;
-      background-size: auto 100%;
-      background-repeat: no-repeat;
+      .snippet-front-face-inner {
+        width: 100%;
+        height: 100%;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        -webkit-clip-path: polygon(100% 0, 100% calc(100% - #{$dogear-edge}), calc(100% - #{$dogear-edge}) 100%, 0 100%, 0 0);
+        clip-path: polygon(100% 0, 100% calc(100% - #{$dogear-edge}), calc(100% - #{$dogear-edge}) 100%, 0 100%, 0 0);
+      }
     }
     .snippet-back-face {
       position: absolute;
@@ -72,7 +81,7 @@ html {
       display: none;
       & + .snippet-inner {
         .snippet-front-face {
-          transition: width $transition-time;
+          transition: width $transition-time linear;
         }
       }
       &:checked + .snippet-inner {
@@ -83,21 +92,51 @@ html {
         }
       }
     }
-    .snippet-dogear {
-      display: none;
+    .snippet-dogear-outer {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 90%;
-      left: 90%;
-      background-color: transparent;
-      > span {
-        display: block;
-        width: 10%;
-        height: 10%;
-        background-color: $foreground-color;
-        color: #333;
+      bottom: 0;
+      right: 0;
+      transition: bottom $transition-time, right ($transition-time * 2) linear, transform ($transition-time * 2) linear;
+      .snippet-dogear {
+        $offset: $dogear-width * 1.41421356; /* This is 1/sin(45deg) */
+        color: $foreground-color;
+        transform-origin: 14.644661% 29.2893219%;
         transform: rotate(-45deg);
+        &:before {
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          border-width: 0 $dogear-width $dogear-width $dogear-width;
+          border-style: solid;
+          border-color: transparent;
+          border-bottom-color: #3C3D42;
+        }
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          width: $dogear-edge;
+          height: $dogear-edge;
+          transform-origin: left top;
+          transform: rotate(-45deg);
+          box-shadow: 2px -2px 5px 1px rgba(0, 0, 0, .3);
+        }
+        & > span {
+          white-space: nowrap;
+          position: absolute;
+          display: block;
+          bottom: 5%;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        @at-root {
+          .snippet-flipper:checked + .snippet-inner .snippet-dogear-outer {
+            transform-origin: right -41.421356%;
+            right: 200%;
+            transform: rotate(-90deg);
+          }
+        }
       }
     }
   }
