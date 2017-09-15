@@ -1,0 +1,32 @@
+if(accumulationActive) {
+  globalState.particleFramebuffer.bind();
+  glClear(GL_COLOR_BUFFER_BIT);
+  graphicsPipeline.bind();
+  loadUniforms(uniforms, props);
+  const_cast<graphics::Texture*>(parameters.particleTexture)->bind(0);
+  glUniform1i(graphicsPipeline_particleTexture_location, 0);
+  const_cast<graphics::Texture*>(parameters.backgroundTexture)->bind(1);
+  glUniform1i(graphicsPipeline_backgroundTexture_location, 1);
+  glBindVertexArray(globalState.dummyVao);
+  glDrawArrays(GL_POINTS, 0, parameters.webcam_width * parameters.webcam_height);
+
+  std::swap(globalState.accumulationFramebuffer, globalState.resultFramebuffer);
+
+  globalState.resultFramebuffer.bind();
+  accGraphicsPipeline.bind();
+  globalState.particleFramebuffer.getTexture().bind(0);
+  glUniform1i(accGraphicsPipeline_particleTexture_location, 0);
+  globalState.accumulationFramebuffer.getTexture().bind(1);
+  glUniform1i(accGraphicsPipeline_historyTexture_location, 1);
+  loadUniforms(accUniforms, props);
+  globalState.screenRectBuffer->draw();
+
+  graphics::Framebuffer::unbind();
+  globalState.resultGraphicsPipeline.bind();
+  globalState.resultFramebuffer.getTexture().bind(0);
+  glUniform1i(globalState.resultGraphicsPipeline_resultTexture_location, 0);
+  globalState.screenRectBuffer->draw();
+
+  graphics::Texture::unbind(0);
+  graphics::Texture::unbind(1);
+}
