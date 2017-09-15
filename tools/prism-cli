@@ -7,13 +7,28 @@ const optionDefinitions = [
   { name: 'output', alias: 'o', type: String },
   { name: 'numbers', alias: 'n', type: Boolean },
 ];
+const prismInfo = require('./prism');
+const languagAliasResolver = Object.keys(prismInfo.languages).reduce((acc, name) => {
+  acc[name] = name;
+  const aliases = prismInfo.languages[name].aliasTitles || {};
+  Object.keys(aliases).forEach((alias) => { acc[alias] = name; });
+  return acc;
+}, {});
 const options = commandLineArgs(optionDefinitions);
 
-function getLanguage(lang) {
+function getLanguage(name) {
+  const lang = languagAliasResolver[name];
+  if (!lang) {
+    return null;
+  }
   if (Prism.languages[lang]) {
     return Prism.languages[lang];
   }
   try {
+    const required = prismInfo.languages[lang].require;
+    if (required && getLanguage(required) === null) {
+      return null;
+    }
     require('prismjs/components/prism-' + lang);
     return Prism.languages[lang];
   } catch(e) {
@@ -53,8 +68,11 @@ fs.readFile(options.file, (err, code) => {
   if (!options.output) {
     console.log(html);
   } else {
-    console.error('Output option not implemented');
-    process.exit(3);
-    return;
+    fs.writeFile(options.output, html, (err) => {
+      if (err) {
+        console.error(err);
+        process.exit(3);
+      }
+    });
   }
 });

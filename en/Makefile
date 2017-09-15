@@ -46,7 +46,7 @@ $(SNIPPETS_HBS): $(TMP)/%/snippet.hbs: snippet.hbs $(TMP)/%/code.hbs %/info.json
 # formatted html
 $(CODE_HBS): $(TMP)/%/code.hbs: %/snippet %/info.json
 	mkdir -p $(dir $@)
-	node $(PROJECT_ROOT_DIR)/tools/prism-cli -l $$($(call NODE,json) -f $*/info.json language) -f $< -n > $@
+	node $(PROJECT_ROOT_DIR)/tools/prism-cli -l $$($(call NODE,json) -f $*/info.json language) -f $< -n -o $@
 
 # Sometimes it's helpful to be able to refer to the snippet's name
 # (e.g. for image url's). That's what these JSON files are good for.
