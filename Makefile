@@ -17,11 +17,12 @@ all: $(LANGUAGES) $(WEBFONTS) $(PROJECT_BUILD_DIR)/styles.css;
 clean:
 	rm -rf $(PROJECT_BUILD_DIR)/*
 
-prepare: node_modules
+prepare: node_modules/.timestamp
 	mkdir -p $(PROJECT_BUILD_DIR)
 
-node_modules: package.json
+node_modules/.timestamp: package.json
 	npm i
+	touch $@
 
 server:
 	npm start

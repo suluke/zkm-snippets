@@ -13,14 +13,19 @@ PNGS := $(foreach SNIPPET,$(SNIPPETS),$(ASSETS)/$(SNIPPET).png)
 QRCODES := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/qr.svg.hbs)
 ALL_SNIPPETS := $(foreach SNIPPET,$(SNIPPETS),{{> $(SNIPPET) }}\
 )
+# This needs to end with slash if it's not empty
+PATH_TO_ROOT :=
 
 .PHONY: all $(SNIPPETS)
 
 all: $(BUILD_DIR)/index.html $(PNGS);
 
 # The page. Depends on the page template and the available snippets 
-$(BUILD_DIR)/index.html: index.hbs $(TMP)/snippets.hbs $(RENAMED_HBS)
-	$(call NODE,hbs) $< -P $(TMP)/snippets.hbs $(foreach SHBS,$(RENAMED_HBS),-P $(SHBS)) -o $(BUILD_DIR)
+$(BUILD_DIR)/index.html: index.hbs $(TMP)/snippets.hbs $(RENAMED_HBS) $(TMP)/page.json
+	$(call NODE,hbs) $< -P $(TMP)/snippets.hbs $(foreach SHBS,$(RENAMED_HBS),-P $(SHBS)) -D $(TMP)/page.json -o $(BUILD_DIR)
+
+$(TMP)/page.json:
+	 echo '{"page-root": "$(PATH_TO_ROOT)"}' > $@
 
 # This rule generates a partial that simply includes all the other snippet
 # partials, so that we don't have to maintain this index manually
@@ -37,9 +42,9 @@ $(RENAMED_HBS): $(TMP)/%.hbs: $(TMP)/%/snippet.hbs
 # template, the snippet's formatted code and the github url to the snippet.
 # Additionally, the partial gets passed some data (like the snippet's name)
 # over JSON.
-$(SNIPPETS_HBS): $(TMP)/%/snippet.hbs: snippet.hbs $(TMP)/%/code.hbs %/info.json $(TMP)/%/qr.svg.hbs $(TMP)/%/data.json
+$(SNIPPETS_HBS): $(TMP)/%/snippet.hbs: snippet.hbs $(TMP)/%/code.hbs %/info.json $(TMP)/%/qr.svg.hbs $(TMP)/%/data.json $(TMP)/page.json
 	mkdir -p $(dir $@)
-	$(call NODE,hbs) $< -P $(@D)/code.hbs -D $*/info.json -P $(@D)/qr.svg.hbs -D $(@D)/data.json -o $(dir $@)
+	$(call NODE,hbs) $< -P $(@D)/code.hbs -D $*/info.json -P $(@D)/qr.svg.hbs -D $(@D)/data.json -D $(TMP)/page.json -o $(dir $@)
 	mv $(dir $@)/snippet.html $@
 
 # A snippet's formatted code. We use prismjs to convert plain text to
