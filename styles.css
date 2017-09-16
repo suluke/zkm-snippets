@@ -1,0 +1,307 @@
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #f8f8f2;
+  background: none;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none; }
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  border-radius: 0.3em; }
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #272822; }
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal; }
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray; }
+
+.token.punctuation {
+  color: #f8f8f2; }
+
+.namespace {
+  opacity: .7; }
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f92672; }
+
+.token.boolean,
+.token.number {
+  color: #ae81ff; }
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #a6e22e; }
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2; }
+
+.token.atrule,
+.token.attr-value,
+.token.function {
+  color: #e6db74; }
+
+.token.keyword {
+  color: #66d9ef; }
+
+.token.regex,
+.token.important {
+  color: #fd971f; }
+
+.token.important,
+.token.bold {
+  font-weight: bold; }
+
+.token.italic {
+  font-style: italic; }
+
+.token.entity {
+  cursor: help; }
+
+/* source-code-pro-200normal - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200;
+  src: local("Source Code Pro Extra Light "), local("Source Code Pro-Extra Light"), url("/fonts/source-code-pro-latin-200.woff2") format("woff2"), url("/fonts/source-code-pro-latin-200.woff") format("woff");
+  /* Modern Browsers */ }
+
+/* source-code-pro-300normal - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: local("Source Code Pro Light "), local("Source Code Pro-Light"), url("/fonts/source-code-pro-latin-300.woff2") format("woff2"), url("/fonts/source-code-pro-latin-300.woff") format("woff");
+  /* Modern Browsers */ }
+
+/* source-code-pro-400normal - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: local("Source Code Pro Regular "), local("Source Code Pro-Regular"), url("/fonts/source-code-pro-latin-400.woff2") format("woff2"), url("/fonts/source-code-pro-latin-400.woff") format("woff");
+  /* Modern Browsers */ }
+
+/* source-code-pro-500normal - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: local("Source Code Pro Medium "), local("Source Code Pro-Medium"), url("/fonts/source-code-pro-latin-500.woff2") format("woff2"), url("/fonts/source-code-pro-latin-500.woff") format("woff");
+  /* Modern Browsers */ }
+
+/* source-code-pro-600normal - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: local("Source Code Pro SemiBold "), local("Source Code Pro-SemiBold"), url("/fonts/source-code-pro-latin-600.woff2") format("woff2"), url("/fonts/source-code-pro-latin-600.woff") format("woff");
+  /* Modern Browsers */ }
+
+/* source-code-pro-700normal - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: local("Source Code Pro Bold "), local("Source Code Pro-Bold"), url("/fonts/source-code-pro-latin-700.woff2") format("woff2"), url("/fonts/source-code-pro-latin-700.woff") format("woff");
+  /* Modern Browsers */ }
+
+/* source-code-pro-900normal - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 900;
+  src: local("Source Code Pro Black "), local("Source Code Pro-Black"), url("/fonts/source-code-pro-latin-900.woff2") format("woff2"), url("/fonts/source-code-pro-latin-900.woff") format("woff");
+  /* Modern Browsers */ }
+
+html, html body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow-x: hidden; }
+
+html a {
+  color: initial;
+  text-decoration: none; }
+
+html pre, html code {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 600;
+  line-height: 1.5; }
+
+html .snippet {
+  position: relative;
+  width: 100vw;
+  height: 56vw;
+  /* max-height: 70%; */
+  overflow: hidden;
+  display: block;
+  color: #f8f8f2;
+  /**
+     * The hardest thing about the front face is getting the lower right
+     * edge to be clipped
+     */
+  /** Snippet flip mechanism **/ }
+  html .snippet:nth-child(1) {
+    background-color: #3d561e; }
+  html .snippet:nth-child(2) {
+    background-color: #3c389d; }
+  html .snippet:nth-child(3) {
+    background-color: #992a19; }
+  html .snippet:nth-child(4) {
+    background-color: #67441a; }
+  html .snippet:nth-child(5) {
+    background-color: #284c36; }
+  html .snippet:nth-child(6) {
+    background-color: #38406a; }
+  html .snippet:nth-child(7) {
+    background-color: #1d5363; }
+  html .snippet:nth-child(8) {
+    background-color: #542973; }
+  html .snippet:nth-child(9) {
+    background-color: #9f2651; }
+  html .snippet:nth-child(10) {
+    background-color: #62302b; }
+  html .snippet .snippet-front-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; }
+    html .snippet .snippet-front-face .snippet-front-face-outer {
+      width: 110.30866vw;
+      height: 102.30866vw;
+      transform-origin: 39.59798vw top;
+      transform: translateX(-39.59798vw) rotate(-45deg);
+      overflow: hidden; }
+      html .snippet .snippet-front-face .snippet-front-face-outer .snippet-front-face-inner {
+        transform-origin: left top;
+        transform: translateX(39.59798vw) rotate(45deg);
+        width: 100vw;
+        height: 56vw;
+        background-size: auto 100%;
+        background-repeat: no-repeat; }
+    .snippet-flipper + .snippet-inner .snippet-front-face {
+      transition: left 300ms linear; }
+      .snippet-flipper + .snippet-inner .snippet-front-face .snippet-front-face-inner {
+        transition: margin-bottom 300ms linear; }
+    .snippet-flipper:checked + .snippet-inner .snippet-front-face {
+      left: -100vw; }
+      .snippet-flipper:checked + .snippet-inner .snippet-front-face .snippet-front-face-inner {
+        margin-bottom: 100vw; }
+  html .snippet .snippet-back-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+    html .snippet .snippet-back-face .snippet-back-face-inner {
+      position: relative;
+      width: 100%;
+      height: 100%; }
+      html .snippet .snippet-back-face .snippet-back-face-inner .snippet-source-container {
+        display: inline-block; }
+      html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code {
+        position: absolute;
+        top: 20px;
+        right: 20px; }
+  html .snippet input.snippet-flipper {
+    display: none; }
+  html .snippet .snippet-dogear-outer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: right 300ms linear; }
+    html .snippet .snippet-dogear-outer .snippet-dogear {
+      color: #f8f8f2;
+      /* carefully hand-crafted origin so that we don't need additional
+           translation of the triangle */
+      transform-origin: 14.644661% 29.2893219%;
+      transform: rotate(-45deg); }
+      html .snippet .snippet-dogear-outer .snippet-dogear:before {
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        border-width: 0 8vw 8vw 8vw;
+        border-style: solid;
+        border-color: transparent;
+        border-bottom-color: #3C3D42; }
+      html .snippet .snippet-dogear-outer .snippet-dogear:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 11.31371vw;
+        height: 11.31371vw;
+        transform-origin: left top;
+        transform: rotate(-45deg);
+        box-shadow: 2px -2px 5px 1px rgba(0, 0, 0, 0.3); }
+      html .snippet .snippet-dogear-outer .snippet-dogear > span {
+        white-space: nowrap;
+        position: absolute;
+        display: block;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%); }
+      .snippet-flipper:checked + .snippet-inner .snippet-dogear-outer {
+        right: 100%; }
+
+svg > rect {
+  display: none; }
+
+svg #p {
+  /* TODO Inverted QR codes are not officially supported by the QR code
+     * SPEC */
+  /* fill: $foreground-color; */ }
