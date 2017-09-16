@@ -6,6 +6,7 @@ $foreground-color: #f8f8f2;
 $transition-time : 300ms;
 $dogear-width: 8vw;
 $dogear-edge: $dogear-width * 1.41421356;
+$dogear-color: #3C3D42;
 $aspect: 100 / 56;
 
 html {
@@ -70,6 +71,20 @@ html {
           background-repeat: no-repeat;
         }
       }
+      @at-root {
+        .snippet-flipper + .snippet-inner .snippet-front-face {
+          transition: left $transition-time linear;
+          .snippet-front-face-inner {
+            transition: margin-bottom $transition-time linear;
+          }
+        }
+        .snippet-flipper:checked + .snippet-inner .snippet-front-face {
+          left: -$snippet-width;
+          .snippet-front-face-inner {
+            margin-bottom: $snippet-width;
+          }
+        }
+      }
     }
     .snippet-back-face {
       position: absolute;
@@ -95,27 +110,17 @@ html {
     /** Snippet flip mechanism **/
     input.snippet-flipper {
       display: none;
-      & + .snippet-inner {
-        .snippet-front-face {
-          transition: width $transition-time linear;
-        }
-      }
-      &:checked + .snippet-inner {
-        & {
-          & > .snippet-front-face {
-            width: 0;
-          }
-        }
-      }
     }
     .snippet-dogear-outer {
       position: absolute;
       bottom: 0;
       right: 0;
-      transition: bottom $transition-time, right ($transition-time * 2) linear, transform ($transition-time * 2) linear;
+      transition: right $transition-time linear;
       .snippet-dogear {
-        $offset: $dogear-width * 1.41421356; /* This is 1/sin(45deg) */
+        $offset: $dogear-width * 1 / $sin45;
         color: $foreground-color;
+        /* carefully hand-crafted origin so that we don't need additional
+           translation of the triangle */
         transform-origin: 14.644661% 29.2893219%;
         transform: rotate(-45deg);
         &:before {
@@ -126,7 +131,7 @@ html {
           border-width: 0 $dogear-width $dogear-width $dogear-width;
           border-style: solid;
           border-color: transparent;
-          border-bottom-color: #3C3D42;
+          border-bottom-color: $dogear-color;
         }
         &:after {
           content: "";
@@ -148,9 +153,7 @@ html {
         }
         @at-root {
           .snippet-flipper:checked + .snippet-inner .snippet-dogear-outer {
-            transform-origin: right -41.421356%;
-            right: 200%;
-            transform: rotate(-90deg);
+            right: 100%;
           }
         }
       }
