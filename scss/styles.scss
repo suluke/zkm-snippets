@@ -14,6 +14,7 @@ html {
     padding: 0;
     height: 100%;
     max-height: 100%;
+    overflow-x: hidden;
   }
 
   a {
@@ -29,8 +30,11 @@ html {
 
   .snippet {
     position: relative;
-    width: 100%;
-    height: (1 / $aspect) * 100vw;
+    $sin45: 0.707106781;
+    $snippet-width: 100vw;
+    $snippet-height: $snippet-width / $aspect;
+    width: $snippet-width;
+    height: $snippet-height;
     /* max-height: 70%; */
     overflow: hidden;
     display: block;
@@ -40,19 +44,31 @@ html {
         background-color: nth($snippet-backgrounds, $i);
       }
     }
+    /**
+     * The hardest thing about the front face is getting the lower right
+     * edge to be clipped
+     */
     .snippet-front-face {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      .snippet-front-face-inner {
-        width: 100%;
-        height: 100%;
-        background-size: auto 100%;
-        background-repeat: no-repeat;
-        -webkit-clip-path: polygon(100% 0, 100% calc(100% - #{$dogear-edge}), calc(100% - #{$dogear-edge}) 100%, 0 100%, 0 0);
-        clip-path: polygon(100% 0, 100% calc(100% - #{$dogear-edge}), calc(100% - #{$dogear-edge}) 100%, 0 100%, 0 0);
+      overflow: hidden;
+      .snippet-front-face-outer {
+        width: $sin45 * ($snippet-width + $snippet-height);
+        height: $sin45 * ($snippet-width - $dogear-edge + $snippet-height);
+        transform-origin: ($sin45 * $snippet-height) top;
+        transform: translateX(-$sin45 * $snippet-height) rotate(-45deg);
+        overflow: hidden;
+        .snippet-front-face-inner {
+          transform-origin: left top;
+          transform: translateX($sin45 * $snippet-height) rotate(45deg);
+          width: $snippet-width;
+          height: $snippet-height;
+          background-size: auto 100%;
+          background-repeat: no-repeat;
+        }
       }
     }
     .snippet-back-face {
