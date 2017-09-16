@@ -4,7 +4,7 @@ BUILD_DIR = $(PROJECT_BUILD_DIR)
 TMP := $(PROJECT_TEMP_DIR)/en
 ASSETS := $(BUILD_DIR)/assets
 
-SNIPPETS := $(wildcard snippet-*)
+SNIPPETS := $(sort $(wildcard snippet-*))
 CODE_HBS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/code.hbs)
 JSONS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/data.json)
 SNIPPETS_HBS := $(foreach SNIPPET,$(SNIPPETS),$(TMP)/$(SNIPPET)/snippet.hbs)
