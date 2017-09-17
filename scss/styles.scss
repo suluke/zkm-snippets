@@ -104,13 +104,15 @@ html {
 
         .snippet-source-container {
           flex-grow: 1;
+          width: 70%;
           max-width: 100%;
           overflow-x: auto;
           display: inline-block;
           margin: 18px;
         }
         .snippet-qr-code {
-          width: 15%;
+          flex-grow: 1;
+          flex-shrink: 2;
           svg {
             width: 100%;
             height: auto;
