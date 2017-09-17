@@ -245,17 +245,32 @@ html {
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%; }
+      height: 100%;
+      overflow-y: scroll; }
       html .snippet .snippet-back-face .snippet-back-face-inner {
         position: relative;
         width: 100%;
-        height: 100%; }
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap; }
         html .snippet .snippet-back-face .snippet-back-face-inner .snippet-source-container {
-          display: inline-block; }
+          flex-grow: 1;
+          max-width: 100%;
+          overflow-x: auto;
+          display: inline-block;
+          margin: 18px; }
         html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code {
-          position: absolute;
-          top: 20px;
-          right: 20px; }
+          width: 15%; }
+          html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code svg {
+            width: 100%;
+            height: auto; }
+            html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code svg > rect {
+              display: none; }
+            html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code svg #p {
+              /* TODO Inverted QR codes are not officially supported by the QR code
+               * SPEC */
+              /* fill: $foreground-color; */ }
     html .snippet input.snippet-flipper {
       display: none; }
     html .snippet .snippet-dogear-outer {
@@ -299,11 +314,3 @@ html {
           transform: translateX(-50%); }
         .snippet-flipper:checked + .snippet-inner .snippet-dogear-outer {
           right: 100%; }
-
-svg > rect {
-  display: none; }
-
-svg #p {
-  /* TODO Inverted QR codes are not officially supported by the QR code
-     * SPEC */
-  /* fill: $foreground-color; */ }

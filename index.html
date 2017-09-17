@@ -15,15 +15,15 @@
       <div class="snippet-back-face-inner">
 <!-- Whitespace-sensitive tags. Do not indent -->
 <pre class="snippet-source-container">
-<code>
-<span class="token keyword">int</span> dim <span class="token operator">=</span> $<span class="token punctuation">{</span>dimension<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<code><span class="token keyword">int</span> dim <span class="token operator">=</span> $<span class="token punctuation">{</span>dimension<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> otherDim <span class="token operator">=</span> dim <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token keyword">float</span> t <span class="token operator">=</span> $<span class="token punctuation">{</span>time<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">float</span> x <span class="token operator">=</span> initialPosition<span class="token punctuation">[</span>otherDim<span class="token punctuation">]</span> <span class="token operator">*</span> $<span class="token punctuation">{</span>waveCount<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">float</span> timeAmp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
 <span class="token keyword">switch</span><span class="token punctuation">(</span>$<span class="token punctuation">{</span>timeInterpolationFunc<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">// linear</span>
-  <span class="token comment" spellcheck="true">// 'linear' is a triangle function that interpolates the points (0,0),(0.25,1),(0.5,0),(0.75,-1),(1,0)</span>
+  <span class="token comment" spellcheck="true">// 'linear' is a triangle function that interpolates</span>
+  <span class="token comment" spellcheck="true">// the points (0,0),(0.25,1),(0.5,0),(0.75,-1),(1,0)</span>
   <span class="token comment" spellcheck="true">// i.e. |/\___</span>
   <span class="token comment" spellcheck="true">//      |  \/</span>
   timeAmp <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token function">fract</span><span class="token punctuation">(</span>t <span class="token operator">+</span> <span class="token number">0.75</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">.</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
@@ -1301,8 +1301,7 @@ position<span class="token punctuation">[</span>dim<span class="token punctuatio
       <div class="snippet-back-face-inner">
 <!-- Whitespace-sensitive tags. Do not indent -->
 <pre class="snippet-source-container">
-<code>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>imgData<span class="token punctuation">.</span>faces<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> reactionState <span class="token operator">==</span> ReactionState<span class="token operator">::</span>Inactive <span class="token operator">&amp;&amp;</span> standbyBlitTimeout <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">.</span>f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<code><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>imgData<span class="token punctuation">.</span>faces<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> reactionState <span class="token operator">==</span> ReactionState<span class="token operator">::</span>Inactive <span class="token operator">&amp;&amp;</span> standbyBlitTimeout <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">.</span>f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token punctuation">{</span>
     <span class="token keyword">auto</span> rect <span class="token operator">=</span> imgData<span class="token punctuation">.</span>faces<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
@@ -2362,8 +2361,7 @@ position<span class="token punctuation">[</span>dim<span class="token punctuatio
       <div class="snippet-back-face-inner">
 <!-- Whitespace-sensitive tags. Do not indent -->
 <pre class="snippet-source-container">
-<code>
-<span class="token keyword">if</span><span class="token punctuation">(</span>accumulationActive<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<code><span class="token keyword">if</span><span class="token punctuation">(</span>accumulationActive<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   globalState<span class="token punctuation">.</span>particleFramebuffer<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">glClear</span><span class="token punctuation">(</span>GL_COLOR_BUFFER_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
   graphicsPipeline<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
