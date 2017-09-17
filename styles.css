@@ -256,12 +256,14 @@ html {
         flex-wrap: wrap; }
         html .snippet .snippet-back-face .snippet-back-face-inner .snippet-source-container {
           flex-grow: 1;
+          width: 70%;
           max-width: 100%;
           overflow-x: auto;
           display: inline-block;
           margin: 18px; }
         html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code {
-          width: 15%; }
+          flex-grow: 1;
+          flex-shrink: 2; }
           html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code svg {
             width: 100%;
             height: auto; }
