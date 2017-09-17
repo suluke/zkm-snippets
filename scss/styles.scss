@@ -93,18 +93,36 @@ html {
       left: 0;
       width: 100%;
       height: 100%;
+      overflow-y: scroll;
       .snippet-back-face-inner {
         position: relative;
         width: 100%;
         height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
 
         .snippet-source-container {
+          flex-grow: 1;
+          max-width: 100%;
+          overflow-x: auto;
           display: inline-block;
+          margin: 18px;
         }
         .snippet-qr-code {
-          position: absolute;
-          top: 20px;
-          right: 20px;
+          width: 15%;
+          svg {
+            width: 100%;
+            height: auto;
+            & > rect {
+              display: none;
+            }
+            #p {
+              /* TODO Inverted QR codes are not officially supported by the QR code
+               * SPEC */
+              /* fill: $foreground-color; */
+            }
+          }
         }
       }
     }
@@ -162,16 +180,5 @@ html {
         }
       }
     }
-  }
-}
-
-svg {
-  & > rect {
-    display: none;
-  }
-  #p {
-    /* TODO Inverted QR codes are not officially supported by the QR code
-     * SPEC */
-    /* fill: $foreground-color; */
   }
 }
