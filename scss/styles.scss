@@ -44,7 +44,7 @@ html {
     @for $i from 1 to length($snippet-backgrounds) + 1 {
       &:nth-child(#{$i}) {
         background-color: nth($snippet-backgrounds, $i);
-        .snippet-front-face {
+        .snippet-front-face-outer {
           background-color: nth($snippet-backgrounds, $i);
         }
       }
