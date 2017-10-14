@@ -44,9 +44,6 @@ html {
     @for $i from 1 to length($snippet-backgrounds) + 1 {
       &:nth-child(#{$i}) {
         background-color: nth($snippet-backgrounds, $i);
-        .snippet-front-face-outer {
-          background-color: nth($snippet-backgrounds, $i);
-        }
       }
     }
     /**
@@ -61,16 +58,11 @@ html {
       height: 100%;
       overflow: hidden;
       .snippet-front-face-outer {
-        width: $sin45 * ($snippet-width + $snippet-height);
-        height: $sin45 * ($snippet-width - $dogear-edge + $snippet-height);
-        transform-origin: ($sin45 * $snippet-height) top;
-        transform: translateX(-$sin45 * $snippet-height) rotate(-45deg);
-        overflow: hidden;
+        width: 100%;
+        height: 100%;
         .snippet-front-face-inner {
-          transform-origin: left top;
-          transform: translateX($sin45 * $snippet-height) rotate(45deg);
-          width: $snippet-width;
-          height: $snippet-height;
+          width: 100%;
+          height: 100%;
           background-size: auto 100%;
           background-repeat: no-repeat;
         }
@@ -167,6 +159,16 @@ html {
           transform-origin: left top;
           transform: rotate(-45deg);
           box-shadow: 2px -2px 5px 1px rgba(0, 0, 0, .3);
+          @at-root {
+            @for $i from 1 to length($snippet-backgrounds) + 1 {
+              .snippet:nth-child(#{$i}) {
+                .snippet-dogear:after {
+                  background-color: nth($snippet-backgrounds, $i);
+                  z-index: -1;
+                }
+              }
+            }
+          }
         }
         /* Display centered text "click to see code" */
         & > span {
