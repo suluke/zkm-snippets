@@ -246,7 +246,7 @@ html {
       /* Force the front face into it's own layer */ }
       html .snippet .snippet-front-face .snippet-front-face-outer {
         width: 110.30866vw;
-        height: 102.30866vw;
+        height: 100.30866vw;
         transform-origin: 39.59798vw top;
         transform: translateX(-39.59798vw) rotate(-45deg);
         overflow: hidden; }
@@ -286,10 +286,15 @@ html {
           max-width: 100%;
           overflow-x: auto;
           display: inline-block;
-          margin: 18px; }
+          padding: 18px;
+          margin: 0; }
         html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code {
           flex-grow: 1;
-          flex-shrink: 2; }
+          flex-shrink: 2;
+          /* FIXME this breaks the flexbox impl but we need to make this
+             work on iPad... */
+          display: inline-block;
+          max-width: 28%; }
           html .snippet .snippet-back-face .snippet-back-face-inner .snippet-qr-code svg {
             width: 100%;
             height: auto; }
@@ -306,8 +311,8 @@ html {
       bottom: 0;
       right: 0;
       background-color: #3C3D42;
-      width: 11.31371vw;
-      height: 11.31371vw;
+      width: 14.14214vw;
+      height: 14.14214vw;
       color: #f8f8f2;
       /* This element is only responsible for the drop shadow */
       /* Display centered text "click to see code" */ }
@@ -315,8 +320,8 @@ html {
         content: "";
         display: block;
         position: absolute;
-        width: 11.31371vw;
-        height: 11.31371vw;
+        width: 14.14214vw;
+        height: 14.14214vw;
         box-shadow: 2px -2px 5px 1px rgba(0, 0, 0, 0.3); }
       html .snippet .snippet-dogear > span {
         text-align: center;
