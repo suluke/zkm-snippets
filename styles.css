@@ -194,51 +194,33 @@ html {
     /** Snippet flip mechanism **/ }
     html .snippet:nth-child(1) {
       background-color: #3d561e; }
-      html .snippet:nth-child(1) .snippet-front-face-outer {
-        background-color: #3d561e; }
     html .snippet:nth-child(2) {
       background-color: #3c389d; }
-      html .snippet:nth-child(2) .snippet-front-face-outer {
-        background-color: #3c389d; }
     html .snippet:nth-child(3) {
       background-color: #992a19; }
-      html .snippet:nth-child(3) .snippet-front-face-outer {
-        background-color: #992a19; }
     html .snippet:nth-child(4) {
       background-color: #67441a; }
-      html .snippet:nth-child(4) .snippet-front-face-outer {
-        background-color: #67441a; }
     html .snippet:nth-child(5) {
       background-color: #284c36; }
-      html .snippet:nth-child(5) .snippet-front-face-outer {
-        background-color: #284c36; }
     html .snippet:nth-child(6) {
       background-color: #38406a; }
-      html .snippet:nth-child(6) .snippet-front-face-outer {
-        background-color: #38406a; }
     html .snippet:nth-child(7) {
       background-color: #1d5363; }
-      html .snippet:nth-child(7) .snippet-front-face-outer {
-        background-color: #1d5363; }
     html .snippet:nth-child(8) {
       background-color: #542973; }
-      html .snippet:nth-child(8) .snippet-front-face-outer {
-        background-color: #542973; }
     html .snippet:nth-child(9) {
       background-color: #9f2651; }
-      html .snippet:nth-child(9) .snippet-front-face-outer {
-        background-color: #9f2651; }
     html .snippet:nth-child(10) {
       background-color: #62302b; }
-      html .snippet:nth-child(10) .snippet-front-face-outer {
-        background-color: #62302b; }
     html .snippet .snippet-front-face {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden; }
+      overflow: hidden;
+      transform: translateZ(0);
+      /* Force the front face into it's own layer */ }
       html .snippet .snippet-front-face .snippet-front-face-outer {
         width: 100%;
         height: 100%; }
