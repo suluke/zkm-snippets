@@ -194,24 +194,44 @@ html {
     /** Snippet flip mechanism **/ }
     html .snippet:nth-child(1) {
       background-color: #3d561e; }
+      html .snippet:nth-child(1) .snippet-front-face-outer {
+        background-color: #3d561e; }
     html .snippet:nth-child(2) {
       background-color: #3c389d; }
+      html .snippet:nth-child(2) .snippet-front-face-outer {
+        background-color: #3c389d; }
     html .snippet:nth-child(3) {
       background-color: #992a19; }
+      html .snippet:nth-child(3) .snippet-front-face-outer {
+        background-color: #992a19; }
     html .snippet:nth-child(4) {
       background-color: #67441a; }
+      html .snippet:nth-child(4) .snippet-front-face-outer {
+        background-color: #67441a; }
     html .snippet:nth-child(5) {
       background-color: #284c36; }
+      html .snippet:nth-child(5) .snippet-front-face-outer {
+        background-color: #284c36; }
     html .snippet:nth-child(6) {
       background-color: #38406a; }
+      html .snippet:nth-child(6) .snippet-front-face-outer {
+        background-color: #38406a; }
     html .snippet:nth-child(7) {
       background-color: #1d5363; }
+      html .snippet:nth-child(7) .snippet-front-face-outer {
+        background-color: #1d5363; }
     html .snippet:nth-child(8) {
       background-color: #542973; }
+      html .snippet:nth-child(8) .snippet-front-face-outer {
+        background-color: #542973; }
     html .snippet:nth-child(9) {
       background-color: #9f2651; }
+      html .snippet:nth-child(9) .snippet-front-face-outer {
+        background-color: #9f2651; }
     html .snippet:nth-child(10) {
       background-color: #62302b; }
+      html .snippet:nth-child(10) .snippet-front-face-outer {
+        background-color: #62302b; }
     html .snippet .snippet-front-face {
       position: absolute;
       top: 0;
@@ -222,19 +242,24 @@ html {
       transform: translateZ(0);
       /* Force the front face into it's own layer */ }
       html .snippet .snippet-front-face .snippet-front-face-outer {
-        width: 100%;
-        height: 100%; }
+        width: 110.30866vw;
+        height: 102.30866vw;
+        transform-origin: 39.59798vw top;
+        transform: translateX(-39.59798vw) rotate(-45deg);
+        overflow: hidden; }
         html .snippet .snippet-front-face .snippet-front-face-outer .snippet-front-face-inner {
-          width: 100%;
-          height: 100%;
+          transform-origin: left top;
+          transform: translateX(39.59798vw) rotate(45deg);
+          width: 100vw;
+          height: 56vw;
           background-size: auto 100%;
           background-repeat: no-repeat; }
       .snippet-flipper + .snippet-inner .snippet-front-face {
-        transition: left 300ms linear; }
+        transition: transform 300ms linear; }
         .snippet-flipper + .snippet-inner .snippet-front-face .snippet-front-face-inner {
           transition: margin-bottom 300ms linear; }
       .snippet-flipper:checked + .snippet-inner .snippet-front-face {
-        left: -100vw; }
+        transform: translate(-100vw); }
         .snippet-flipper:checked + .snippet-inner .snippet-front-face .snippet-front-face-inner {
           margin-bottom: 100vw; }
     html .snippet .snippet-back-face {
@@ -273,4 +298,43 @@ html {
     html .snippet input.snippet-flipper {
       display: none; }
     html .snippet .snippet-dogear-outer {
-      display: none; }
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      transition: right 300ms linear; }
+      html .snippet .snippet-dogear-outer .snippet-dogear {
+        color: #f8f8f2;
+        /* carefully hand-crafted origin so that we don't need additional
+           translation of the triangle */
+        transform-origin: 14.644661% 29.2893219%;
+        transform: rotate(-45deg);
+        /* This element is only responsible for the drop shadow */
+        /* Display centered text "click to see code" */ }
+        html .snippet .snippet-dogear-outer .snippet-dogear:before {
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          border-width: 0 8vw 8vw 8vw;
+          border-style: solid;
+          border-color: transparent;
+          border-bottom-color: #3C3D42; }
+        html .snippet .snippet-dogear-outer .snippet-dogear:after {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 11.31371vw;
+          height: 11.31371vw;
+          transform-origin: left top;
+          transform: rotate(-45deg);
+          box-shadow: 2px -2px 5px 1px rgba(0, 0, 0, 0.3); }
+        html .snippet .snippet-dogear-outer .snippet-dogear > span {
+          text-align: center;
+          position: absolute;
+          display: block;
+          width: 100%;
+          bottom: 5%;
+          left: 50%;
+          transform: translateX(-50%); }
+        .snippet-flipper:checked + .snippet-inner .snippet-dogear-outer {
+          right: 100%; }
