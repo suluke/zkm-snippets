@@ -4,7 +4,7 @@
 $snippet-backgrounds: #3d561e #3c389d #992a19 #67441a #284c36 #38406a #1d5363 #542973 #9f2651 #62302b;
 $foreground-color: #f8f8f2;
 $transition-time : 300ms;
-$dogear-width: 8vw;
+$dogear-width: 10vw;
 $dogear-edge: $dogear-width * 1.41421356;
 $dogear-color: #3C3D42;
 $aspect: 100 / 56;
@@ -111,17 +111,24 @@ html {
         justify-content: space-between;
         flex-wrap: wrap;
 
+        $code-width: 70%;
         .snippet-source-container {
           flex-grow: 1;
-          width: 70%;
+          width: $code-width;
           max-width: 100%;
           overflow-x: auto;
           display: inline-block;
-          margin: 18px;
+          padding: 18px;
+          margin: 0;
         }
         .snippet-qr-code {
           flex-grow: 1;
           flex-shrink: 2;
+          /* FIXME this breaks the flexbox impl but we need to make this
+             work on iPad... */
+          display: inline-block;
+          max-width: 100% - $code-width - 2%;
+
           svg {
             width: 100%;
             height: auto;
