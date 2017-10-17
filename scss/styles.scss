@@ -129,64 +129,7 @@ html {
       display: none;
     }
     .snippet-dogear-outer {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      transition: right $transition-time linear;
-      .snippet-dogear {
-        $offset: $dogear-width * 1 / $sin45;
-        color: $foreground-color;
-        /* carefully hand-crafted origin so that we don't need additional
-           translation of the triangle */
-        transform-origin: 14.644661% 29.2893219%;
-        transform: rotate(-45deg);
-        &:before {
-          content: "";
-          display: block;
-          width: 0;
-          height: 0;
-          border-width: 0 $dogear-width $dogear-width $dogear-width;
-          border-style: solid;
-          border-color: transparent;
-          border-bottom-color: $dogear-color;
-        }
-        /* This element is only responsible for the drop shadow */
-        &:after {
-          content: "";
-          display: block;
-          position: absolute;
-          width: $dogear-edge;
-          height: $dogear-edge;
-          transform-origin: left top;
-          transform: rotate(-45deg);
-          box-shadow: 2px -2px 5px 1px rgba(0, 0, 0, .3);
-          @at-root {
-            @for $i from 1 to length($snippet-backgrounds) + 1 {
-              .snippet:nth-child(#{$i}) {
-                .snippet-dogear:after {
-                  background-color: nth($snippet-backgrounds, $i);
-                  z-index: -1;
-                }
-              }
-            }
-          }
-        }
-        /* Display centered text "click to see code" */
-        & > span {
-          text-align: center;
-          position: absolute;
-          display: block;
-          width: 100%;
-          bottom: 5%;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        @at-root {
-          .snippet-flipper:checked + .snippet-inner .snippet-dogear-outer {
-            right: 100%;
-          }
-        }
-      }
+      display: none;
     }
   }
 }
