@@ -78,13 +78,13 @@ html {
       }
       @at-root {
         .snippet-flipper + .snippet-inner .snippet-front-face {
-          transition: left $transition-time linear;
+          transition: transform $transition-time linear;
           .snippet-front-face-inner {
             transition: margin-bottom $transition-time linear;
           }
         }
         .snippet-flipper:checked + .snippet-inner .snippet-front-face {
-          left: -$snippet-width;
+          transform: translate(-$snippet-width);
           .snippet-front-face-inner {
             margin-bottom: $snippet-width;
           }
