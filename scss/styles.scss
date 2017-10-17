@@ -111,7 +111,7 @@ html {
         justify-content: space-between;
         flex-wrap: wrap;
 
-        $code-width: 70%;
+        $code-width: 66%;
         .snippet-source-container {
           flex-grow: 1;
           width: $code-width;
@@ -127,7 +127,9 @@ html {
           /* FIXME this breaks the flexbox impl but we need to make this
              work on iPad... */
           display: inline-block;
-          max-width: 100% - $code-width - 2%;
+          max-width: 100% - $code-width - 4%;
+          vertical-align: top;
+          float: right;
 
           svg {
             width: 100%;
