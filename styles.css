@@ -165,16 +165,19 @@ pre[class*="language-"] {
   /* Modern Browsers */ }
 
 html {
-  font-family: Sans-Serif; }
+  font-family: Sans-Serif;
+  /*
+  body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  */ }
   html, html body {
     margin: 0;
     padding: 0;
     height: 100%;
     max-height: 100%; }
-  html body {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch; }
   html a {
     color: initial;
     text-decoration: none; }
@@ -184,7 +187,8 @@ html {
     line-height: 1.5; }
   html .snippet {
     position: relative;
-    width: 100vw;
+    /* width: $snippet-width; // disabled in favor of display: block */
+    display: block;
     height: 56vw;
     /* max-height: 70%; */
     overflow: hidden;
@@ -273,6 +277,8 @@ html {
       height: 100%;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch; }
+      html .snippet .snippet-back-face::-webkit-scrollbar {
+        display: none; }
       html .snippet .snippet-back-face .snippet-back-face-inner {
         position: relative;
         width: 100%;
