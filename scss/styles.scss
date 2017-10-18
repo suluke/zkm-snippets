@@ -105,7 +105,9 @@ html {
       width: 100%;
       height: 100%;
       overflow-y: scroll;
+      /* unfortunately, this is buggy and so we have to live with awkward scrolling
       -webkit-overflow-scrolling: touch;
+      */
       &::-webkit-scrollbar {
         display: none;
       }
