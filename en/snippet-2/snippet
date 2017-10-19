@@ -1,17 +1,6 @@
-if(!imgData.faces.empty() && reactionState == ReactionState::Inactive && standbyBlitTimeout <= 0.f) {
-  {
-    auto rect = imgData.faces[0];
+vec2 screenTarget = getDirectionVector(hsv[0] + ${rotation}) * vec2(${radius}) * vec2(invScreenAspectRatio, 1.);
+vec2 target = (invViewProjectionMatrix * vec4(screenTarget, 0, 1)).xy;
 
-    auto rectTl = glm::vec2(rect.tl().x, rect.tl().y);
-    auto rectBr = glm::vec2(rect.br().x, rect.br().y);
-    glm::vec2 faceMin = rectTl / glm::vec2(imageProvider.width(), imageProvider.height());
-    glm::vec2 faceMax = rectBr / glm::vec2(imageProvider.width(), imageProvider.height());
+vec2 d = target - initialPosition.xy;
 
-    glm::vec2 targetSize = glm::vec2(std::uniform_real_distribution<float>(.2f, .4f)(random),
-                                      std::uniform_real_distribution<float>(.2f, .4f)(random));
-    glm::vec2 targetMin = glm::vec2(std::uniform_real_distribution<float>(0.f, 1.f - targetSize.x)(random),
-                                      std::uniform_real_distribution<float>(0.f, 1.f - targetSize.y)(random));
-    glm::vec2 targetMax = targetMin + targetSize;
-
-    faceBlitter.blit(webcamTexture, faceMin, faceMax, overlayFramebuffer, targetMin, targetMax);
-  }
+position.xy += mix(vec2(0.), d, ${x});
